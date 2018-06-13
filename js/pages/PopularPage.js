@@ -4,25 +4,43 @@
 import React from 'react';
 import {StyleSheet, Text, View, FlatList } from 'react-native';
 import NavigationBar from '../components/NavigationBar';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
 
 //包含两块内容，状态栏（静），滚动视图（动）
 export default class PopularPage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            dataSource: [{key:'Hello'}, {key:'World'}, {key:'Cup'}, {key:'Russia'}, {key:'2018'}]
-        }
-    }
     render() {
         return (
             <View style={styles.container}>
                 <NavigationBar/>
-                <FlatList
-                    data={this.state.dataSource}
-                    renderItem={({item}) => <Text>{item.key}</Text>}
-                />
+                <ScrollableTabView
+                    tabBarBackgroundColor='#63B8FF'
+                    tabBarActiveTextColor='#FFF'
+                    tabBarInactiveTextColor='#F5FFFA'
+                    tabBarUnderlineStyle={{backgroundColor:'#E7E7E7', height:2}}>
+                    <PopularTab tabLabel='IOS'/>
+                    <PopularTab tabLabel='Android' />
+                    <Text tabLabel='Java'>JAVA</Text>
+                    <PopularTab tabLabel='JavaScript' />
+                </ScrollableTabView>
             </View>
         );
+    }
+}
+
+class PopularTab extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            dataSource: [{key:'World'}, {key:'Cup'}, {key:'Russia'}, {Key:'2018'}]
+        }
+    }
+    render() {
+        return (
+            <FlatList
+                data = {this.state.dataSource}
+                renderItem = {({item}) => <Text>{item.key}</Text>}
+            />
+        )
     }
 }
 
