@@ -22,7 +22,7 @@ export default class HomePage extends React.Component {
                         renderIcon={() => <Image style={styles.icon} source={require('../../res/images/ic_popular.png')} />}
                         renderSelectedIcon={() => <Image style={[styles.icon,{tintColor:'#63B8FF'}]} source={require('../../res/images/ic_popular.png')} />}
                         onPress={() => this.setState({ selectedTab: 'popular' })}>
-                        <PopularPage/>
+                        <PopularPage {...this.props} />
                     </TabNavigator.Item>
                     <TabNavigator.Item
                         selected={this.state.selectedTab === 'trending'}
@@ -49,7 +49,7 @@ export default class HomePage extends React.Component {
                         renderIcon={() => <Image style={styles.icon} source={require('../../res/images/ic_my.png')} />}
                         renderSelectedIcon={() => <Image style={[styles.icon,{tintColor:'#63B8FF'}]} source={require('../../res/images/ic_my.png')} />}
                         onPress={() => this.setState({ selectedTab: 'my' })}>
-                        <MyPage/>
+                        <MyPage {...this.props} />
                     </TabNavigator.Item>
                 </TabNavigator>
             </View>
