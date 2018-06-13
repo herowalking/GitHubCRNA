@@ -70,12 +70,13 @@ class PopularTab extends React.Component {
     handleRefresh = () => {
         this.loadData();
     }
+    renderRow = ({item}) => <Text>{item.full_name}</Text>
     render() {
         return (
             <FlatList
                 data = {this.state.dataSource}
                 keyExtractor={this._keyExtractor}
-                renderItem = {({item}) => <Text>{item.full_name}</Text>}
+                renderItem = {this.renderRow}
                 refreshControl={
                     <RefreshControl
                         refreshing={this.state.isLoading}
@@ -83,8 +84,8 @@ class PopularTab extends React.Component {
                         tintColor="#63B8FF"
                         title='正在加载...'
                         titleColor="#63B8FF"
-                        colors={['red', 'yellow', 'blue']}
-                        progressBackgroundColor='green'
+                        colors={['green', 'yellow', 'blue']}
+                        progressBackgroundColor='tomato'
                     />
                 }
             />
