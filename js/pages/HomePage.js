@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
-import PopularPage from './PopularPage'
+import PopularPage from './PopularPage';
+import MyPage from './MyPage';
 
 export default class HomePage extends React.Component {
     constructor(props){
@@ -48,7 +49,7 @@ export default class HomePage extends React.Component {
                         renderIcon={() => <Image style={styles.icon} source={require('../../res/images/ic_my.png')} />}
                         renderSelectedIcon={() => <Image style={[styles.icon,{tintColor:'#63B8FF'}]} source={require('../../res/images/ic_my.png')} />}
                         onPress={() => this.setState({ selectedTab: 'my' })}>
-                        <View style={{backgroundColor: 'blue', flex:1}}></View>
+                        <MyPage/>
                     </TabNavigator.Item>
                 </TabNavigator>
             </View>
