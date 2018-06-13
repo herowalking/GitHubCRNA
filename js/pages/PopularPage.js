@@ -42,7 +42,7 @@ class PopularTab extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataSource: [{key:'World'}, {key:'Cup'}, {key:'Russia'}, {Key:'2018'}],
+            dataSource: [],
             isLoading: true
         }
     }
