@@ -10,7 +10,7 @@ export default class PopularPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataSource: ['Hello', 'World', 'Cup']
+            dataSource: [{key:'Hello'}, {key:'World'}, {key:'Cup'}, {key:'Russia'}, {key:'2018'}]
         }
     }
     render() {
@@ -19,7 +19,7 @@ export default class PopularPage extends React.Component {
                 <NavigationBar/>
                 <FlatList
                     data={this.state.dataSource}
-                    renderItem={({item}) => <Text>{item}</Text>}
+                    renderItem={({item}) => <Text>{item.key}</Text>}
                 />
             </View>
         );
