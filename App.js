@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 
 import Root from './js/pages/setup';
-// console.disableYellowBox = true;
+console.disableYellowBox = true;
 
 export default class GitHubCRNA extends Component {
     render() {
