@@ -6,10 +6,13 @@ import {StyleSheet, Text, View, FlatList, RefreshControl, TouchableOpacity, Imag
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import NavigationBar from "../components/NavigationBar";
 import GitHubTrending from 'GitHubTrending';
+import TrendingProjectRow from '../components/TrendingProjectRow';
+import ProjectDetails from './ProjectDetails';
 
 var popular_def_lans = require('../../res/data/popular_def_lans.json');
 
-export default class TrendingPage extends React.Component {
+//包含两块内容，状态栏（静），滚动视图（动）
+export default class PopularPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -77,10 +80,25 @@ class TrendingTab extends React.Component {
                 console.log(error);
         }).done();
     }
+
+    componentDidMount = () => {
+        this.loadData();
+    }
+
     handleRefresh = () => {
         this.loadData();
     }
-    renderRow = ({item}) => <Text>{item.fullName}</Text>
+
+    //项目被选中，跳转到详情页
+    handleProjectSelect = (obj) => {
+        // console.log(obj);
+        this.props.navigator.push({
+            component:ProjectDetails,
+            params:{title:obj.fullName, url:`https://github.com${obj.url}`}
+        })
+    }
+    renderRow = ({item}) => <TrendingProjectRow item={item} onSelect={() => this.handleProjectSelect(item)}/>
+
     render() {
         return (
             <FlatList
@@ -100,9 +118,6 @@ class TrendingTab extends React.Component {
                 }
             />
         )
-    }
-    componentDidMount = () => {
-        this.loadData();
     }
 }
 
