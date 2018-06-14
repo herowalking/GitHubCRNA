@@ -2,9 +2,10 @@
  * Created by Lincoln on 6/13/2018.
  */
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, DeviceEventEmitter, AsyncStorage, Alert } from 'react-native';
 import NavigationBar from "../components/NavigationBar";
 import CheckBox from 'react-native-check-box';
+import ArrayUtils from '../components/ArrayUtils';
 
 const popular_def_lans  = require('../../res/data/popular_def_lans.json');
 
@@ -19,7 +20,15 @@ export default class CustomKeyPage extends React.Component {
         this.props.navigator.pop();
     };
     doSave = () => {
-        alert('Save');
+        console.log(JSON.stringify(this.state.data));
+        //AsyncStorage是一个简单的、异步的、持久化的Key-Value存储系统
+        AsyncStorage.setItem('custom_key', JSON.stringify(this.state.data))
+            .then(() => {
+                Alert.alert('Tips', 'Save success!', [
+                    {text:'Yes', onPress: () => {this.doBack()}}
+                ]);
+                DeviceEventEmitter.emit('HOMEPAGE_RELOAD','HomePage reloading');
+            });
     };
     getNavRightBtn = () => {
         return <View style={{flexDirection:'row', alignItems:'center'}}>
@@ -88,6 +97,18 @@ export default class CustomKeyPage extends React.Component {
                 </View>
             </View>
         );
+    }
+    componentDidMount = () => {
+        //加载本地数据
+        AsyncStorage.getItem('custom_key')
+            .then(value => {
+                //有用户数据，选中该选中CheckBox
+                if(value !== null) {
+                    this.setState({data: JSON.parse(value)});
+                }
+                //把原始数组克隆
+                this.orignData = ArrayUtils.clone(this.state.data);
+            })
     }
 }
 

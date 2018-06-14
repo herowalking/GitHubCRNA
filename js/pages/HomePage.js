@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, DeviceEventEmitter } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import PopularPage from './PopularPage';
 import MyPage from './MyPage';
@@ -54,6 +54,22 @@ export default class HomePage extends React.Component {
                 </TabNavigator>
             </View>
         );
+    }
+
+    componentDidMount() {
+        //添加事件监听
+        this.listener = DeviceEventEmitter.addListener('HOMEPAGE-RELOAD', (n) => {
+            //主页重新加载
+            //跳转到新的场景，并且重置整个路由栈
+            this.state.navigator.resetTo({
+                component: HomePage
+            })
+
+        })
+    }
+
+    componentWillUnmount() {
+        this.listener.remove();
     }
 }
 
