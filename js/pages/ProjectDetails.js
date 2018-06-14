@@ -28,7 +28,21 @@ export default class ProjectDetails extends React.Component {
             </TouchableOpacity>
         </View>
     };
+    getNavRightBtn = () => {
+        return <View style={{flexDirection:'row'}}>
+            <TouchableOpacity activeOpacity={0.5}>
+                <Image source={require('../../res/images/ic_share.png')}
+                       style={{width:20,height:20,marginRight:10,tintColor:'#FFF'}}/>
+            </TouchableOpacity>
+
+            <TouchableOpacity activeOpacity={0.5}>
+                <Image source={require('../../res/images/ic_unstar_transparent.png')}
+                       style={{width:20,height:20,marginRight:10,tintColor:'#FFF'}}/>
+            </TouchableOpacity>
+        </View>
+    }
     handleNavStateChange = (s) => {
+        //当前WebView是否能够返回,存入状态
         this.setState({canGoBack: s.canGoBack})
     };
 
@@ -38,11 +52,12 @@ export default class ProjectDetails extends React.Component {
                 <NavigationBar
                     title='Project details page'
                     leftButton={this.getNavLeftBtn()}
+                    rightButton={this.getNavRightBtn()}
                 />
                 <WebView
                     ref='webview'
                     startInLoadingState = {true}
-                    source = {{uri: 'http://www.herowalking.com'}}
+                    source = {{uri: this.props.url}}
                     onNavigationStateChange={this.handleNavStateChange}
                 />
             </View>

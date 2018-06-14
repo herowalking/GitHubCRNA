@@ -26,7 +26,7 @@ export default class MyPage extends React.Component {
                 <NavigationBar title='My'/>
                 <View style={{flexDirection:'column', alignItems:'center', marginTop:30}}>
                     <Text onPress={this.gotoCustomKey}>Page jump</Text>
-                    <Text onPress={this.gotoProjectDetails}>WebVien jump</Text>
+                    <Text onPress={this.gotoProjectDetails}>WebView jump</Text>
                 </View>
             </View>
         );
