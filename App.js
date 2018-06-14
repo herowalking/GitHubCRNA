@@ -6,15 +6,13 @@ import {
     View
 } from 'react-native';
 
-import HomePage from './js/pages/HomePage';
-console.disableYellowBox = true;
+import Root from './js/pages/setup';
+// console.disableYellowBox = true;
 
 export default class GitHubCRNA extends Component {
     render() {
         return (
-            <View style={styles.container}>
-                <HomePage/>
-            </View>
+            <Root />
         )
     }
 }

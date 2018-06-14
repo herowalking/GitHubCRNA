@@ -16,7 +16,7 @@ export default class Root extends React.Component {
         // Navigator会建立一个路由栈，运行时的页面栈
         // initialRoute 初始化路由，传入组件的名字
         return <Navigator
-            initialRoute = {{componet: HomePage}}
+            initialRoute = {{component: HomePage}}
             renderScene = {(route, navigator) => this.renderScene(route, navigator)}
         />
     }
